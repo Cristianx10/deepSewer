@@ -8,10 +8,11 @@ Documentacion de metodos
 ========================
 
 # Logica
-Atributos: 
+## Atributos: 
 - app: PApplet // variable de referencia a la clase main
 Metodos:
 + Logica(PApplet) // constructor de la clase logica
++ pintar
 
 # Main
 ## Atributos:
@@ -35,7 +36,7 @@ Metodos:
 - puntaje: int // muestra el puntaje del personaje
 
 ## Metodos:
-+ Personaje() // inicializador del constructor del personaje
++ Personaje(Logica) // inicializador del constructor del personaje
 + pintar() : void // se encarga de la visualizacion del personaje
 + salto() : void // se encarga de la interaccion del salto del personaje
 + escalar() : void // se encarga de la programacion que le permite subir escaleras al personaje 
@@ -48,7 +49,7 @@ Metodos:
 - isSobre: boolean // comprueba si algo esta sobre el objeto
 
 ## Metodos:
-+ Barril(): void // constructor de la clase
++ Barril(Logica): void // constructor de la clase
 + pintar(): void // se encarga de la visaulizacion del objeto en el lienzo
 + mover(): void // se encarga del movimiento del barril en los ejes de lienzo
 
@@ -56,7 +57,7 @@ Metodos:
 ## Atributos:
 - pos: PVector // describe la posicion del objeto del lienzo
 ## Metodos:
-+ Escaleras() // constructor de la clase
++ Escaleras(Logica) // constructor de la clase
 + pintar(): void // se encarga de la visaulizacion del objeto en el lienzo
 
 # Camara
@@ -66,7 +67,7 @@ Metodos:
 - limites: int[] // limita los alcances maximos que pueda tener la pantalla en el lienzo 
 
 ## Metodos:
-+ Camara() // constructor del objeto
++ Camara(Logica) // constructor del objeto
 + moverRight(): void // se encarga de las propiedades que le permiten a la camara moverse hacia la derecha
 + moverLeft(): void // se encarga de las propiedades que le permiten a la camara moverse hacia la izquierda
 + moverUp(): void //se encarga de las propiedades que le permiten a la camara moverse hacia arriba
@@ -79,8 +80,8 @@ Metodos:
 ## Atributos:
 - pos: PVector; // describe la posicion del lienzo
 - lienzo: PImage // almacena el escenario para posteriormente ser pintado
-Metodos:
-+ Escenario() // constructor de clase
+## Metodos:
++ Escenario(Logica) // constructor de clase
 + pintar(): void // pinta lienzo en la pantalla
 
 
@@ -88,4 +89,44 @@ Metodos:
 ## Atributos:
 - pos : int; //Se encarga de monitoria la posicion en el lienzo
 ## Metodos:
++ Hueco(): void
 + pintar(): void
+
+
+Servidor
+=====
+
+# Inteface MensajeObserver
+## Atributos
++ onDataRecever(Object): void //Encargada de gestionar el patron observer
+
+# ServerSingleton
+## Atributos
+_-_ serverSocket: ServerSocket //Espera la comunicion o solicitud
+
+## Metodos
+_+_ ServerSingleton() // Constructor de clase
+_+_ getConstructor(): ServerSingleton //Se inicializa a si mismo si detecta que es un nulo
+_+_ run(): void //Porgrama la recepcion y envio
+_+_ setObservador(): void //Encargada de gestionar el patron observer
+
+# TCPConection
+## Atributos
+_-_ socket: Socket // Crea canales de comunicacion
+
+## Metodos
+_+_ TCPConection()
+_+_ getConstructor(): Comunicacion
+_+_ run(): void
+_+_ serObservador(MensajeObservador): void
+
+
+# Receptor
+## Atributos
+_-_ socket: Socket
+
+## Metodos
+_+_ Receptor()
+_+_ run(): void
+
+
