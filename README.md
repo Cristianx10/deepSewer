@@ -14,9 +14,9 @@ Metodos:
 + Logica(PApplet) // constructor de la clase logica
 
 # Main
-Atributos:
+## Atributos:
 - log: Logica // añade toda la funcionalidad de la aplicacion
-Metodos:
+## Metodos:
 + settings (): void // inicializa el tamaño de la pantalla de la aplicacion
 + setup (): void // inicializa todas las variables y clases creadas
 + draw (): void // pinta todos los componentes que se visualizan en la aplicacion
@@ -24,7 +24,7 @@ Metodos:
 + mouseReleased(): void // se encarga de todas las acciones cuando el mouse no esta presionado
 
 # Personaje
-Atributos:
+## Atributos:
 - pos : PVector // se encarga de gestionar la posicion del personaje en el lienzo
 - vel : PVector // comprueba y modifica la velocidad del personaje
 - isSalto: boolean // valida si el personaje esta saltando
@@ -34,7 +34,7 @@ Atributos:
 - vida : boolean // comprueba si esta vivo
 - puntaje: int // muestra el puntaje del personaje
 
-# Metodos:
+## Metodos:
 + Personaje() // inicializador del constructor del personaje
 + pintar() : void // se encarga de la visualizacion del personaje
 + salto() : void // se encarga de la interaccion del salto del personaje
@@ -42,30 +42,30 @@ Atributos:
 
 
 # Barril
-Atributos: 
+## Atributos: 
 - pos: PVector // describe la posicion del objeto del lienzo
 - vel: PVector // controla la velocidad del objeto
 - isSobre: boolean // comprueba si algo esta sobre el objeto
 
-Metodos:
+## Metodos:
 + Barril(): void // constructor de la clase
 + pintar(): void // se encarga de la visaulizacion del objeto en el lienzo
 + mover(): void // se encarga del movimiento del barril en los ejes de lienzo
 
 # Escalera
-Atributos:
+## Atributos:
 - pos: PVector // describe la posicion del objeto del lienzo
-Metodos:
+## Metodos:
 + Escaleras() // constructor de la clase
 + pintar(): void // se encarga de la visaulizacion del objeto en el lienzo
 
 # Camara
-Atributos:
+## Atributos:
 - pos: PVector // enfoca la posicion de una parte de la pantalla 
 - pos: PVecto  // velocidad del desplazamiento de la camara
 - limites: int[] // limita los alcances maximos que pueda tener la pantalla en el lienzo 
 
-Metodos:
+## Metodos:
 + Camara() // constructor del objeto
 + moverRight(): void // se encarga de las propiedades que le permiten a la camara moverse hacia la derecha
 + moverLeft(): void // se encarga de las propiedades que le permiten a la camara moverse hacia la izquierda
@@ -76,7 +76,7 @@ Metodos:
 
 
 # Escenario
-Atributos:
+## Atributos:
 - pos: PVector; // describe la posicion del lienzo
 - lienzo: PImage // almacena el escenario para posteriormente ser pintado
 Metodos:
@@ -85,7 +85,7 @@ Metodos:
 
 
 # Hueco
-Atributos:
+## Atributos:
 - pos : int; //Se encarga de monitoria la posicion en el lienzo
-Metodos:
+## Metodos:
 + pintar(): void
