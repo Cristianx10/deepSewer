@@ -115,18 +115,17 @@ _+_ setObservador(): void //Encargada de gestionar el patron observer
 _-_ socket: Socket // Crea canales de comunicacion
 
 ## Metodos
-_+_ TCPConection()
-_+_ getConstructor(): Comunicacion
-_+_ run(): void
-_+_ serObservador(MensajeObservador): void
+_+_ TCPConection() //Constructor de clase
+_+_ run(): void // Se encarga de leer constantemente datos de entrada
+_+_ setObservador(MensajeObservador): void // Define un observador
 
 
 # Receptor
 ## Atributos
-_-_ socket: Socket
+_-_ socket: Socket // crea canales de comunicacion para envio o recepcion de datos
 
 ## Metodos
-_+_ Receptor()
-_+_ run(): void
+_+_ Receptor() // constructor de clase
+_+_ run(): void // Se encarga de leer los datos constantemente
 
 
