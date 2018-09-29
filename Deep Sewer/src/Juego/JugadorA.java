@@ -5,13 +5,11 @@ import processing.core.PVector;
 
 public class JugadorA extends Personaje {
 
-
 	/*
 	 * Constructor del JugadorA que solo recibe una variable Logica y en el que se
 	 * incializacian los booleans ,se cargan las imagenes y la posicion del
 	 * personajes
 	 */
-	
 
 	public JugadorA(Logica log, PVector pos) {
 		super(log, pos);
@@ -19,17 +17,22 @@ public class JugadorA extends Personaje {
 		contSalto = 0;
 		id = "UsuarioA";
 		start();
-		
-		
-		
+
+		personaje[0] = new Animacion(app, pos, "Caballo", 8);
+		personaje[1] = new Animacion(app, pos, "Caballo", 8);
+		personaje[2] = new Animacion(app, pos, "Caballo", 8);
+		personaje[3] = new Animacion(app, pos, "Caballo", 8);
 
 	}
 
 	// Metodo para pintar el personaje y recorrer el metodo de movimiento todo el
 	// tiempo
 	public void pintar() {
-		
-
+		for (Animacion p : personaje) {
+			if (p.isPlaying()) {
+				p.pintar();
+			}
+		}
 	}
 
 	/*
@@ -37,20 +40,19 @@ public class JugadorA extends Personaje {
 	 * la posicion respectivas teclas y la accion de saltar
 	 */
 	public void movimiento() {
-		vista = 0;
 
 		gravedad();
 
-//
-//		if (seMovio[0] && obstaculo.right()) {
-//			pos.x += vel.x;
-//			vista = 2;
-//		}
-//
-//		if (seMovio[1] && obstaculo.left()) {
-//			pos.x -= vel.x;
-//			vista = 3;
-//		}
+		//
+		// if (seMovio[0] && obstaculo.right()) {
+		// pos.x += vel.x;
+		// vista = 2;
+		// }
+		//
+		// if (seMovio[1] && obstaculo.left()) {
+		// pos.x -= vel.x;
+		// vista = 3;
+		// }
 
 		saltar();
 
@@ -73,11 +75,11 @@ public class JugadorA extends Personaje {
 				seMovio[1] = true;
 				break;
 
-//			case PConstants.UP:
-//				if (!obstaculo.down()) {
-//					seMovio[2] = true;
-//				}
-//				break;
+			// case PConstants.UP:
+			// if (!obstaculo.down()) {
+			// seMovio[2] = true;
+			// }
+			// break;
 
 			}
 		}

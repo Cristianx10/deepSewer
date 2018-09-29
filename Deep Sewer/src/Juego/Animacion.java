@@ -74,5 +74,11 @@ public class Animacion extends Thread {
 		
 		this.movimiento = false;
 	}
+	
+	public boolean isPlaying() {
+		
+		return movimiento;
+		
+	}
 
 }

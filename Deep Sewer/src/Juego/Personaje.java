@@ -31,7 +31,7 @@ public abstract class Personaje extends Thread {
 		this.height = 45;
 		this.pos = pos;
 		this.seMovio = new boolean[4];
-		
+		personaje = new Animacion[4];
 		
 	}
 
