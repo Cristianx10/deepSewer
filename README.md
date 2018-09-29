@@ -1,21 +1,7 @@
-<<<<<<< HEAD
-﻿<<<<<<< HEAD
-﻿<<<<<<< HEAD
-=======
-
->>>>>>> 758b697b358130f7ae212f473f64831d78882538
-﻿# 
-=======
-
-descripcion diferente
-=======
->>>>>>> dff7156f82c746cd9ceeeda3419d340a6da28fda
-
+﻿
 Deep Sewer
 =======
 Es un juego basado en el escapismo de una alcantarrilla, en la cual dos jugadores tendran que competir por salir esquivando barriles hasta llegar a la salida
-
-nueva descripcion
 
 
 Documentacion de metodos
