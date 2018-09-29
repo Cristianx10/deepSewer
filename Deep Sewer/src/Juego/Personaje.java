@@ -38,8 +38,6 @@ public abstract class Personaje extends Thread {
 		
 		
 		this.controlMovi = new boolean[4];
-		
-		
 		controlMovi[0] = true;
 		controlMovi[1] = true;
 		controlMovi[2] = true;
