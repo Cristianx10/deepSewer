@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<<<<<<< HEAD
 ﻿<<<<<<< HEAD
 =======
@@ -7,6 +8,8 @@
 =======
 
 descripcion diferente
+=======
+>>>>>>> dff7156f82c746cd9ceeeda3419d340a6da28fda
 
 Deep Sewer
 =======
