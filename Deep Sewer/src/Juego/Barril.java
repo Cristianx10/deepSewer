@@ -3,22 +3,37 @@ package Juego;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Barril extends Thread{
+public class Barril extends Thread implements Objeto{
 
 	private Logica log;
 	private PApplet app;
+	private Camara camara;
 	
+	private int width, height;
 	private int reposo;
 	private boolean vivo;
-	private PVector pos;
+	private PVector pos, vel;
+	private Animacion barril;
 
 	public Barril(Logica log, PVector pos) {
+		this.log = log;
+		this.app = log.getPApplet();
+		this.camara = log.getCamara();
 		this.pos = pos;
+		this.vel = new PVector(5, 5);
+		
+		this.barril = new Animacion(app, pos, "Caballo", 6);
 
 	}
 
 
 	public void pintar() {
+		barril.pintar();
+		if(isSobreMouse()) {
+			
+		}
+	
+		arrastre();
 		
 	}
 
@@ -46,75 +61,61 @@ public class Barril extends Thread{
 		
 		//gravedad();
 		
-		if(siguiendo) {
-			
-		}else {
-			enReposo();
-		}
+		enReposo();
 		
 		
 	}
 	
 	public void acciones() {
 		//Acciones hacia los peronajes--------------------------------------------------------------------------
-		siguiendo = false;
 		
-		for(Personaje p : log.getPlayers()) {
-			//Chouqe con los personajes--------------------------------------
-			if(pos.dist(p.pos) < (width/2 + p.width/2) && !p.golpeado()) {
-				p.golpe = true;
-			}
-			
-		}
+//		for(Personaje p : log.getPlayers()) {
+//			//Chouqe con los personajes--------------------------------------
+//			if(pos.dist(p.pos) < (width/2 + p.width/2) && !p.golpeado()) {
+//				p.golpe = true;
+//			}
+//			
+//		}
 		gravedad();
 	}
 	
-	public gravedad() {
+	public void gravedad() {
 		
 	}
 	
 	public void enReposo() {
-		if(!obstaculo.left()) {
-			vel.x=+1;
-			vista = 0;
+//		if(!obstaculo.left()) {
+//			vel.x=+1;
+//			
+//		}
+//		if(!obstaculo.right()) {
+//			vel.x=-1;
+//		
+//		}
+//		
+//		pos.x+=vel.x;
+	}
+
+
+	@Override
+	public boolean isSobreMouse() {
+		boolean sobre = false;
+		if (PApplet.dist(pos.x, pos.y, camara.mouseX(), camara.mouseY()) < width) {
+			sobre = true;
 		}
-		if(!obstaculo.right()) {
-			vel.x=-1;
-			vista =1;
-		}
-		
-		pos.x+=vel.x;
+		return sobre;
 	}
 	
-	public void perseguir(Personaje p) {
-		int dis  = (int) (p.pos.x - this.pos.x);
-		if(dis >= 0) {
-			
-			if(obstaculo.right()) {
-				pos.x += 2;
-			}
-			else {
-				saltar();
-				
-				if(!obstaculo.down()) {
-					seMovio[2] = true;
-				}
-			}
-			
-		}else if(dis <= 0 ) {
-			
-			if(obstaculo.left()) {
-				pos.x -= 2;
-			}
-			else {
-				saltar();
-				if(!obstaculo.down()) {
-					seMovio[2] = true;
-				}
-			}
-				
-		}		
+	public void arrastre() {
+		this.pos.x = camara.mouseX();
+		this.pos.y = camara.mouseY();
 	}
+	
+	public String toString(){
+		
+		return null;
+	}
+	
 
 
 }

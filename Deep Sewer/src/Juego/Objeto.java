@@ -2,6 +2,8 @@ package Juego;
 
 public interface Objeto {
 	
-  public String toString();
+  abstract public String toString();
+  
+  public boolean isSobreMouse();
 
 }

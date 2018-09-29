@@ -10,6 +10,7 @@ public class Camara extends Thread{
 	private Logica log;
 	private PImage base;
 	private PVector pos;
+	private int mouseX, mouseY;
 	private Personaje p;
 	private boolean activo;
 
@@ -39,6 +40,8 @@ public class Camara extends Thread{
 			try {
 				movientoCamara();
 		
+				this.mouseX = (int) (app.mouseX - pos.x);
+				this.mouseY = (int) (app.mouseY - pos.y);
 				
 				sleep(20);
 			}catch (InterruptedException e) {
@@ -109,5 +112,14 @@ public class Camara extends Thread{
 	public PVector getPos() {
 		return pos;
 	}
+	
+	public int mouseX() {
+		return mouseX;
+	}
+	
+	public int mouseY() {
+		return mouseY;
+	}
+	
 
 }
