@@ -14,7 +14,7 @@ public class Ejecutor extends PApplet {
 	}
 
 	Logica log;
-	
+
 	Animacion a;
 
 	Cliente c;
@@ -27,8 +27,8 @@ public class Ejecutor extends PApplet {
 
 	public void setup() {
 		log = new Logica(this);
-		//c = new Cliente();
-		
+		// c = new Cliente();
+
 	}
 
 	public void draw() {
@@ -70,7 +70,28 @@ public class Ejecutor extends PApplet {
 			break;
 
 		}
+		
+		if(letra('p')) {
+			log.getTxt().actualizar();
+		}
 
+	}
+
+	public boolean letra(char l) {
+		char m = ' ';
+		char n = ' ';
+
+		if (Character.isUpperCase(l)) {
+			m = l;
+			n = Character.toLowerCase(l);
+		} else {
+			m = Character.toUpperCase(l);
+			n = l;
+		}
+
+		boolean pulsado = (key == m || key == n);
+
+		return pulsado;
 	}
 
 }

@@ -119,7 +119,7 @@ public class JugadorA extends Personaje {
 	@Override
 	public void run() {
 
-		while (isVivo) {
+		while (vivo) {
 			try {
 
 				movimiento();

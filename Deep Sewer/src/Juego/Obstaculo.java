@@ -1,5 +1,7 @@
 package Juego;
 
+import java.rmi.server.SocketSecurityException;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -7,47 +9,51 @@ public class Obstaculo extends Thread {
 
 	private Logica log;
 	private PApplet app;
-	private Personaje p;
+	private ObjetoBase p;
 	private PImage plataforma;
 	private int colorBase;
 	private boolean vivo = true;
 
-	public Obstaculo(Logica log, Personaje p) {
+	public Obstaculo(Logica log, ObjetoBase p) {
 		this.log = log;
 		this.app = log.getPApplet();
 		this.p = p;
 		this.colorBase = app.color(0);
 		this.plataforma = log.escenaNb;
+
 		start();
 	}
 
 	public void limitesBasic() {
 
-		if ((p.pos.x + p.width / 2) + p.vel.x > plataforma.width) {
-			p.controlMovi[0] = false;
-		} else {
-			p.controlMovi[0] = true;
-		}
+		if (p != null && plataforma != null) {
+			if (limRight()) {
+				p.controlMovi[0] = false;
+			} else {
+				p.controlMovi[0] = true;
+			}
 
-		if ((p.pos.x - p.width / 2) - p.vel.x < 0) {
-			p.controlMovi[1] = false;
-		} else {
-			p.controlMovi[1] = true;
-		}
+			if (limLeft()) {
+				p.controlMovi[1] = false;
+			} else {
+				p.controlMovi[1] = true;
+			}
 
-		if ((p.pos.y + p.height / 2) + p.vel.y > plataforma.height) {
+			if (limUp()) {
 
-		} else {
-			// p.controlMovi[2] = true;
-		}
+			} else {
+				// p.controlMovi[2] = true;
+			}
 
-		if ((p.pos.y - p.height / 2) - p.vel.y < 0) {
+			if (limDown()) {
 
-		} else {
-			// p.controlMovi[3] = true;
+			} else {
+				// p.controlMovi[3] = true;
+			}
 		}
 
 	}
+
 
 	public boolean up() {
 		PImage img = plataforma;
@@ -147,6 +153,22 @@ public class Obstaculo extends Thread {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public boolean limRight() {
+		return (p.pos.x + p.width / 2) + p.vel.x >= plataforma.width;
+	}
+
+	public boolean limLeft() {
+		return (p.pos.x - p.width / 2) + p.vel.x <= 0;
+	}
+
+	public boolean limDown() {
+		return (p.pos.y + p.height / 2) + p.vel.y > plataforma.height;
+	}
+
+	public boolean limUp() {
+		return (p.pos.y - p.height / 2) + p.vel.y < 0;
 	}
 
 }

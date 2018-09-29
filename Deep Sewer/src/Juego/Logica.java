@@ -1,9 +1,10 @@
 package Juego;
 
-import java.awt.Image;
 
-import javax.net.ssl.SSLException;
+import java.util.ArrayList;
 
+
+import Juego.Txt.Arrastrable;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -15,6 +16,9 @@ public class Logica {
 	private Personaje p;
 	private Camara camara;
 	private PImage escena;
+	private Txt txt;
+	
+	private ArrayList<Arrastrable> objetos;
 	
 	private Barril b;
 	private Obstaculo plataforma;
@@ -25,18 +29,21 @@ public class Logica {
 		this.app = app;
 		camara = new Camara(this);
 		
-		b = new Barril(this, new PVector(400, 0));
+		
 		p = new JugadorA(this, new PVector(200, 0));
 		
 		escenaNb = app.loadImage("Imagenes/Escenario/nb_1.png");
 		escena = app.loadImage("Imagenes/Escenario/1.png");
 		
-		//escena = escenaNb;
+		escena = escenaNb;
 
 		
 		this.camara.setObjetivo(escena, p);
 		
 		plataforma = new Obstaculo(this, p);
+		
+		objetos = new ArrayList<Arrastrable>();
+		txt = new Txt(this);
 	}
 
 	public void pintar() {
@@ -47,8 +54,19 @@ public class Logica {
 		p.pintar();
 		
 		
-		b.pintar();
+		
+		
+		
+		for (Arrastrable o : objetos) {
+			o.pintar();
+		}
+		
+		
 		camara.fin();
+	}
+	
+	public void keyPressed() {
+		
 	}
 	
 
@@ -60,6 +78,14 @@ public class Logica {
 	
 	public Camara getCamara() {
 		return camara;
+	}
+	
+	public ArrayList<Txt.Arrastrable> getObjetos(){
+		return objetos;
+	}
+	
+	public Txt getTxt() {
+		return txt;
 	}
 	
 	

@@ -18,7 +18,7 @@ public class Animacion extends Thread {
 
 	public Animacion(PApplet app, PVector pos, String name, int numero) {
 		this.app = app;
-
+		
 		vivo = true;
 		img = new ArrayList<>();
 		this.pos = pos;
@@ -28,9 +28,11 @@ public class Animacion extends Thread {
 		}
 
 		start();
+		
 	}
 
 	public void pintar() {
+		
 		PImage imagen = img.get(contAnim);
 		app.imageMode(PConstants.CENTER);
 		app.image(imagen, pos.x, pos.y);

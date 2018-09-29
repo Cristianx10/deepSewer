@@ -5,30 +5,19 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-public abstract class Personaje extends Thread {
+public abstract class Personaje extends ObjetoBase {
 
-	protected PApplet app;
-	protected Logica log;
-	protected PVector pos;
-	protected PVector vel;
-	protected int width, height;
 	protected Animacion[] personaje;
-	protected boolean isVivo;
-
-	protected String id;
-	protected boolean[] controlMovi;
-	protected boolean[] seMovio; // variable para saber si el personaje se movio
+	
+	
 	protected int reposo;
 	protected boolean golpe;
 	protected int contSalto; // variable contador para ??
 
 	public Personaje(Logica log, PVector pos) {
-		this.log = log;
-		this.app = log.getPApplet();
-		this.pos = new PVector(0, 0);
+		super(log);
 		this.vel = new PVector(5, 5);
-		this.isVivo = true;
-		this.width = 191;
+		this.width = 150;
 		this.height = 144;
 		this.pos = pos;
 		this.seMovio = new boolean[4];
@@ -66,14 +55,7 @@ public abstract class Personaje extends Thread {
 	}
 
 	
-	public void gravedad() {
 	
-		if(seMovio[3]) {
-			pos.y += 4;
-		}
-			
-	
-	}
 	
 
 	public void saltar() {
@@ -102,9 +84,7 @@ public abstract class Personaje extends Thread {
 		return seMovio;
 	}
 	
-	public String toString() {
-		return id + ", " + pos.x + ", " + pos.y;
-	}
+	
 	
 
 }

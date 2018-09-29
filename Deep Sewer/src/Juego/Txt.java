@@ -14,8 +14,8 @@ public class Txt {
 
 	public Txt(Logica log) {
 		this.log = log;
-		this.app = app;
-		this.txt = app.loadStrings("Objetos");
+		this.app = log.getPApplet();
+		this.txt = app.loadStrings("objetos.txt");
 
 		objetosReft = new ArrayList<Dato>();
 
@@ -25,20 +25,22 @@ public class Txt {
 				String name = linea[0];
 				int x = Integer.parseInt(linea[1]);
 				int y = Integer.parseInt(linea[2]);
-
 				objetosReft.add(new Dato(name, new PVector(x, y)));
 			}
 
 		}
-
+		
+		
+		crearObjetos();
+		
 	}
 
 	public void crearObjetos() {
 		
 		for (Dato dato : objetosReft) {
 			switch (dato.nombre) {
-			case "":
-
+			case "barril":
+				log.getObjetos().add(new Barril(log, dato.pos, dato.nombre));
 				break;
 			}
 		}
@@ -47,15 +49,16 @@ public class Txt {
 
 	public void actualizar() {
 
-		ArrayList<Objeto> obj = new ArrayList<Objeto>();
+		ArrayList<Arrastrable> obj = new ArrayList<Arrastrable>();
 		// Añadir los ArrayList necesario para el funcionamiento
 
+		obj = log.getObjetos();
 		// -----------------------------------------------------
 
 		String[] data = new String[obj.size()];
 
 		for (int i = 0; i < data.length; i++) {
-			data[i] = data.toString();
+			data[i] = obj.get(i).toString();
 		}
 
 		app.saveStrings("objetos.txt", data);
@@ -72,6 +75,18 @@ public class Txt {
 			this.pos = pos;
 		}
 
+	}
+	
+	public interface Arrastrable {
+		
+		public void pintar();
+		
+		public String toString();
+		
+		public void arrastrar();
+		
+		public boolean isSobreMouse();
+		
 	}
 
 }

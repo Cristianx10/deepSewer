@@ -11,7 +11,7 @@ public class Camara extends Thread{
 	private PImage base;
 	private PVector pos;
 	private int mouseX, mouseY;
-	private Personaje p;
+	private ObjetoBase p;
 	private boolean activo;
 
 	// private float pos.x, pos.y;
@@ -96,12 +96,12 @@ public class Camara extends Thread{
 		}
 	}
 	
-	public void setObjetivo(PImage img, Personaje p) {
+	public void setObjetivo(PImage img, ObjetoBase p) {
 		this.p = p;
 		this.base = img;
 	}
 
-	public void setPersonaje(Personaje p) {
+	public void setPersonaje(ObjetoBase p) {
 		this.p = p;
 	}
 	
