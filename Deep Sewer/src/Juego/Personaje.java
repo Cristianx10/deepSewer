@@ -12,7 +12,7 @@ public abstract class Personaje extends Thread {
 	protected PVector pos;
 	protected PVector vel;
 	protected int width, height;
-	protected PImage personaje;
+	protected Animacion[] personaje;
 	protected boolean isVivo;
 
 	protected String id;
@@ -31,6 +31,7 @@ public abstract class Personaje extends Thread {
 		this.height = 45;
 		this.pos = pos;
 		this.seMovio = new boolean[4];
+		
 		
 	}
 
