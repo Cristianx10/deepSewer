@@ -38,6 +38,7 @@ public class Camara extends Thread{
 		while(activo) {
 			try {
 				movientoCamara();
+		
 				
 				sleep(20);
 			}catch (InterruptedException e) {
@@ -55,7 +56,7 @@ public class Camara extends Thread{
 
 	// Mueve la camara hacia arriba si no para el limete de 0 en la posicion y.
 	public void moviCamUp() {
-		if (base != null && p != null && p.seMovio[2]) {
+		if (base != null && p != null /*&& p.seMovio[2]*/) {
 			if (pos.y <= -p.vel.y && !(p.pos.y - PApplet.abs(pos.y) > app.height / 2)) {
 				pos.y += p.vel.y;
 			}
@@ -65,7 +66,7 @@ public class Camara extends Thread{
 	// Mueve la camara del personaje hacia abajo si Y no pasa el tamano del lienzo
 	// total
 	public void moviCamDown() {
-		if (base != null && p != null && p.seMovio[3]) {
+		if (base != null && p != null /*&& p.seMovio[3]*/) {
 			if (p.pos.y - PApplet.abs(pos.y) > app.height / 2 + p.vel.y && (pos.y > -(base.height - app.height))) {
 				// -------------------------------------------resta el tamano de la pantalla con
 				// el del lienzo total para que detenga el moviemiento de la camara.
@@ -76,7 +77,7 @@ public class Camara extends Thread{
 
 	// Mueve la camara en la posicion x del personaje cuando ocurre movimiento.
 	public void moviCamLeft() {
-		if (base != null && p != null && p.seMovio[1]) {
+		if (base != null && p != null /*&& p.seMovio[1]*/) {
 			if (pos.x <= -p.vel.x && !(p.pos.x - PApplet.abs(pos.x) >= app.width / 2)) {
 				pos.x += p.vel.x;
 			}
@@ -85,7 +86,7 @@ public class Camara extends Thread{
 
 	// Mueve la camara en la posicion x del personaje cuando ocurre movimiento.
 	public void moviCamRight() {
-		if (base != null && p != null && p.seMovio[0]) {
+		if (base != null && p != null /*&& p.seMovio[0]*/) {
 			if (pos.x - PApplet.abs(pos.x) >= app.width / 2 && (pos.x > -(base.width - app.width))) {
 				pos.x -= p.vel.x;
 			}

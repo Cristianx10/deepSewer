@@ -16,6 +16,7 @@ public abstract class Personaje extends Thread {
 	protected boolean isVivo;
 
 	protected String id;
+	protected boolean[] controlMovi;
 	protected boolean[] seMovio; // variable para saber si el personaje se movio
 	protected int reposo;
 	protected boolean golpe;
@@ -27,11 +28,22 @@ public abstract class Personaje extends Thread {
 		this.pos = new PVector(0, 0);
 		this.vel = new PVector(5, 5);
 		this.isVivo = true;
-		this.width = 45;
-		this.height = 45;
+		this.width = 191;
+		this.height = 144;
 		this.pos = pos;
 		this.seMovio = new boolean[4];
+		
 		personaje = new Animacion[4];
+		seMovio[3] = true;
+		
+		
+		this.controlMovi = new boolean[4];
+		
+		
+		controlMovi[0] = true;
+		controlMovi[1] = true;
+		controlMovi[2] = true;
+		controlMovi[3] = true;
 		
 	}
 
@@ -58,7 +70,10 @@ public abstract class Personaje extends Thread {
 	
 	public void gravedad() {
 	
+		if(seMovio[3]) {
 			pos.y += 4;
+		}
+			
 	
 	}
 	

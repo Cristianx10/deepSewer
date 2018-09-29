@@ -27,6 +27,7 @@ public class Animacion extends Thread {
 			img.add(ima);
 		}
 
+		start();
 	}
 
 	public void pintar() {

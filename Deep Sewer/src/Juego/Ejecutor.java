@@ -29,15 +29,11 @@ public class Ejecutor extends PApplet {
 		log = new Logica(this);
 		//c = new Cliente();
 		
-
-		
-		a = new Animacion(this, new PVector(width/2, height/2), "caballo", 8);
-		a.start();
 	}
 
 	public void draw() {
 		background(255);
-		a.pintar();
+		log.pintar();
 	}
 
 	public void keyPressed() {

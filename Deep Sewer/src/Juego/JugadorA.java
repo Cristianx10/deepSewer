@@ -23,6 +23,10 @@ public class JugadorA extends Personaje {
 		personaje[2] = new Animacion(app, pos, "Caballo", 8);
 		personaje[3] = new Animacion(app, pos, "Caballo", 8);
 
+		for (Animacion p : personaje) {
+			p.play();
+		}
+
 	}
 
 	// Metodo para pintar el personaje y recorrer el metodo de movimiento todo el
@@ -43,16 +47,14 @@ public class JugadorA extends Personaje {
 
 		gravedad();
 
-		//
-		// if (seMovio[0] && obstaculo.right()) {
-		// pos.x += vel.x;
-		// vista = 2;
-		// }
-		//
-		// if (seMovio[1] && obstaculo.left()) {
-		// pos.x -= vel.x;
-		// vista = 3;
-		// }
+		if (seMovio[0] && controlMovi[0]) {
+			pos.x += vel.x;
+		}
+
+		if (seMovio[1] && controlMovi[1]) {
+			pos.x -= vel.x;
+
+		}
 
 		saltar();
 
@@ -75,11 +77,11 @@ public class JugadorA extends Personaje {
 				seMovio[1] = true;
 				break;
 
-			// case PConstants.UP:
-			// if (!obstaculo.down()) {
-			// seMovio[2] = true;
-			// }
-			// break;
+			case PConstants.UP:
+
+				seMovio[2] = true;
+
+				break;
 
 			}
 		}
@@ -103,11 +105,15 @@ public class JugadorA extends Personaje {
 				break;
 
 			case PConstants.UP:
-				// seMovio[2] = false;
+				seMovio[2] = false;
 				break;
 
 			}
 		}
+
+		seMovio[0] = false;
+		seMovio[1] = false;
+
 	}
 
 	@Override
@@ -117,6 +123,12 @@ public class JugadorA extends Personaje {
 			try {
 
 				movimiento();
+
+				if (app.keyPressed) {
+					keyPressed();
+				} else {
+					keyReleased();
+				}
 
 				sleep(20);
 			} catch (InterruptedException e) {
