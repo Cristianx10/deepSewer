@@ -21,7 +21,7 @@ public class Camara extends Thread{
 	public Camara(Logica log) {
 		this.log = log;
 		this.app = log.getPApplet();
-		this.pos = new PVector(0, 0);
+		this.pos = new PVector(0, -1700);
 		activo = true;
 		start();
 	}

@@ -1,5 +1,7 @@
 package Juego;
 
+import Comunicar.Mensaje;
+import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
@@ -16,17 +18,18 @@ public class JugadorA extends Personaje {
 
 		contSalto = 0;
 		id = "UsuarioA";
+
+		personaje[0] = new Animacion(log, pos, "Personaje/1");
+		personaje[1] = new Animacion(log, pos, "Personaje/2");
+		personaje[2] = new Animacion(log, pos, "Personaje/3");
+		personaje[3] = new Animacion(log, pos, "Personaje/4");
+
+		this.width = personaje[0].width;
+		this.height = personaje[0].height;
+
+		personaje[0].play();
+
 		start();
-
-		personaje[0] = new Animacion(app, pos, "Caballo", 8);
-		personaje[1] = new Animacion(app, pos, "Caballo", 8);
-		personaje[2] = new Animacion(app, pos, "Caballo", 8);
-		personaje[3] = new Animacion(app, pos, "Caballo", 8);
-
-		for (Animacion p : personaje) {
-			p.play();
-		}
-
 	}
 
 	// Metodo para pintar el personaje y recorrer el metodo de movimiento todo el
@@ -37,55 +40,44 @@ public class JugadorA extends Personaje {
 				p.pintar();
 			}
 		}
+		
+		if(PApplet.dist(log.getEscenario().puerta.pos.x, log.getEscenario().puerta.pos.y, pos.x, pos.y) < 30) {
+			log.setPantalla(3);
+			System.out.println(PApplet.dist(1100, 124, 1100, 124));
+		}
+
 	}
 
 	/*
 	 * Metodo para cuando el personaje cuando se opriman las teclas el se mueva para
 	 * la posicion respectivas teclas y la accion de saltar
 	 */
-	public void movimiento() {
 
-		gravedad();
-
-		if (seMovio[0] && controlMovi[0]) {
-			pos.x += vel.x;
-		}
-
-		if (seMovio[1] && controlMovi[1]) {
-			pos.x -= vel.x;
-
-		}
-
-		saltar();
-
-	}
 
 	// Metodo para asignar las teclas a los movimientos del personaje en un swicth
 	public void keyPressed() {
-
 		if (app.key == app.CODED) {
 
 			switch (app.keyCode) {
 
 			case PConstants.RIGHT:
-
-				seMovio[0] = true;
-
+				controlMovi[0] = true;
 				break;
 
 			case PConstants.LEFT:
-				seMovio[1] = true;
+				controlMovi[1] = true;
 				break;
 
 			case PConstants.UP:
-
-				seMovio[2] = true;
-
+				controlMovi[4] = true;
+				controlMovi[2] = true;
+				break;
+			case PConstants.DOWN:
+				controlMovi[3] = true;
 				break;
 
 			}
 		}
-
 	}
 
 	// Metodo para saber si el personaje no se esta moviendo con ninguna de las
@@ -97,23 +89,29 @@ public class JugadorA extends Personaje {
 			switch (app.keyCode) {
 
 			case PConstants.RIGHT:
-				seMovio[0] = false;
+				controlMovi[0] = false;
 				break;
 
 			case PConstants.LEFT:
-				seMovio[1] = false;
+				controlMovi[1] = false;
 				break;
 
 			case PConstants.UP:
-				seMovio[2] = false;
+				controlMovi[2] = false;
+				break;
+			case PConstants.DOWN:
+				controlMovi[3] = true;
 				break;
 
 			}
 		}
 
-		seMovio[0] = false;
-		seMovio[1] = false;
+		controlMovi[0] = false;
+		controlMovi[1] = false;
+		controlMovi[2] = false;
+		controlMovi[3] = false;
 
+		
 	}
 
 	@Override
@@ -123,12 +121,14 @@ public class JugadorA extends Personaje {
 			try {
 
 				movimiento();
+				validar();
+			
 
-				if (app.keyPressed) {
-					keyPressed();
-				} else {
-					keyReleased();
-				}
+//				if (app.keyPressed) {
+//					keyPressed();
+//				} else {
+//					keyReleased();
+//				}
 
 				sleep(20);
 			} catch (InterruptedException e) {
@@ -137,6 +137,11 @@ public class JugadorA extends Personaje {
 			}
 		}
 
+	}
+
+	@Override
+	public void respuesta(Mensaje m) {
+		Comunicacion(m);
 	}
 
 }

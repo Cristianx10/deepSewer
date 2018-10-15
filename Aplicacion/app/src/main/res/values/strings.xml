@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ControlDeep</string>
+    <string name="saludo">DeepSewer</string>
+    <string name="descripcion">Hola usuario para continuar por favor registre sus datos</string>
+
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="jump">Jump</string>
+    <string name="start">Start</string>
+
+
+</resources>

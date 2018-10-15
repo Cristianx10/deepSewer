@@ -1,5 +1,7 @@
 package Juego;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -8,38 +10,49 @@ public class Barril extends ObjetoBase implements Txt.Arrastrable {
 	private Obstaculo obstaculo;
 
 	private int reposo;
+	private Escalera es;
 
-	private Animacion barril;
+	private Animacion img;
 
-	public Barril(Logica log, PVector pos, String id) {
+	private ArrayList<Escalera> escaleras;
+
+	public Barril(Logica log, PVector pos) {
 		super(log);
-		this.id = id;
-		
+		this.id = "barril";
+
 		this.pos = pos;
 		this.vel = new PVector(5, 5);
-		this.width = 100;
-		this.height = 100;
-
 		this.obstaculo = new Obstaculo(log, this);
-		
-		this.barril = new Animacion(app, pos, "Caballo", 6);
-		
+
+		this.obstaculo.setNegativo(txt.obtenerImg("nb_escenario").get(0));
+
+		this.img = new Animacion(log, pos, "Barril");
+
+		this.width = img.width;
+		this.height = img.height;
+		img.play();
+
+		escaleras = new ArrayList<>();
+
 		start();
 	}
 
 	public void pintar() {
-		barril.pintar();
+		img.pintar();
 		arrastrar();
+
 	}
 
 	public void run() {
 		while (vivo) {
 			try {
+				getEscalera();
 				movimiento();
-				acciones();
-				gravedad();
 				
-				
+				if(obstaculo.limDown()) {
+					vivo = false;
+				}
+
 				sleep(20);
 			} catch (InterruptedException e) {
 				// TODO: handle exception
@@ -48,46 +61,68 @@ public class Barril extends ObjetoBase implements Txt.Arrastrable {
 
 	}
 
+	boolean cargaEscaleras = false;
+	
+
+
+	public void getEscalera() {
+		if (log.getEscenario() != null && !cargaEscaleras) {
+			for (int i = 0; i < log.getEscenario().getEscalera().size(); i++) {
+				Escalera o = log.getEscenario().getEscalera().get(i);
+				
+					Escalera c = (Escalera) o;
+					escaleras.add(c);
+				
+			}
+		}
+	}
+
+	boolean bajando = false;
+
 	public void movimiento() {
 
-		 if(obstaculo.limLeft() || obstaculo.limRight()) {
-			 pos.x += -vel.x;
-			 vel.x *=-1;
-		 }
-		 pos.x += vel.x;
+		if (es == null) {
+			for (Escalera e : escaleras) {
+				if (isSobreEscalera(e)) {
+					bajando = true;
+					es = e;
+				} 
+			}
+		}
+		
+		if(es != null) {
+			if (isSobreEscalera(es)) {
+				bajando = true;
+			} else {
+				es = null;
+				bajando = false;
 
-		// gravedad();
+			}
+		}
 
-		enReposo();
+		if (!bajando) {
+			if (obstaculo.limLeft() || obstaculo.limRight()) {
+				pos.x += -vel.x;
+				vel.x *= -1;
+			}
+			pos.x += vel.x;
+		} else {
+			pos.y += vel.y;
+		}
+
+		if (obstaculo.down()) {
+			gravedad();
+		}
 
 	}
 
-	public void acciones() {
-		// Acciones hacia los
-		// peronajes--------------------------------------------------------------------------
-
-		// for(Personaje p : log.getPlayers()) {
-		// //Chouqe con los personajes--------------------------------------
-		// if(pos.dist(p.pos) < (width/2 + p.width/2) && !p.golpeado()) {
-		// p.golpe = true;
-		// }
-		//
-		// }
-		gravedad();
-	}
-
-
-	public void enReposo() {
-		// if(!obstaculo.left()) {
-		// vel.x=+1;
-		//
-		// }
-		// if(!obstaculo.right()) {
-		// vel.x=-1;
-		//
-		// }
-		//
-		// pos.x+=vel.x;
+	public boolean isSobreEscalera(Escalera e) {
+		boolean isSobre = false;
+		if (pos.x - width / 2 > e.pos.x - (e.width / 2) && pos.x + width / 2 < e.pos.x + (e.width / 2)
+				&& pos.y + height > e.pos.y - (e.height / 2) && pos.y + height < e.pos.y + (e.height / 2)) {
+			isSobre = true;
+		}
+		return isSobre;
 	}
 
 	@Override
@@ -105,13 +140,6 @@ public class Barril extends ObjetoBase implements Txt.Arrastrable {
 			this.pos.x = camara.mouseX();
 			this.pos.y = camara.mouseY();
 		}
-	}
-
-	@Override
-	public String toString() {
-
-		return id + "," + (int)pos.x + "," + (int)pos.y;
-
 	}
 
 }

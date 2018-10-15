@@ -1,6 +1,5 @@
 package Juego;
 
-import java.rmi.server.SocketSecurityException;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -9,7 +8,7 @@ public class Obstaculo extends Thread {
 
 	private Logica log;
 	private PApplet app;
-	private ObjetoBase p;
+	public ObjetoBase p;
 	private PImage plataforma;
 	private int colorBase;
 	private boolean vivo = true;
@@ -19,57 +18,30 @@ public class Obstaculo extends Thread {
 		this.app = log.getPApplet();
 		this.p = p;
 		this.colorBase = app.color(0);
-		this.plataforma = log.escenaNb;
-
-		start();
-	}
-
-	public void limitesBasic() {
-
-		if (p != null && plataforma != null) {
-			if (limRight()) {
-				p.controlMovi[0] = false;
-			} else {
-				p.controlMovi[0] = true;
-			}
-
-			if (limLeft()) {
-				p.controlMovi[1] = false;
-			} else {
-				p.controlMovi[1] = true;
-			}
-
-			if (limUp()) {
-
-			} else {
-				// p.controlMovi[2] = true;
-			}
-
-			if (limDown()) {
-
-			} else {
-				// p.controlMovi[3] = true;
-			}
-		}
 
 	}
 
+	public void setNegativo(PImage img) {
+		this.plataforma = img;
+	}
 
+	
 	public boolean up() {
-		PImage img = plataforma;
 		int dis = 5;
 		boolean sobre = false;
+		if (p != null && plataforma != null) {
+			PImage img = plataforma;
+			if (img.get((int) p.pos.x, (int) (p.pos.y - dis)) == colorBase ||
 
-		if (img.get((int) p.pos.x, (int) (p.pos.y - dis)) == colorBase ||
+					img.get((int) (p.pos.x - (p.width / 2) + dis), (int) (p.pos.y - (p.height / 2))) == colorBase ||
 
-				img.get((int) (p.pos.x - (p.width / 2) + dis), (int) (p.pos.y - (p.height / 2))) == colorBase ||
+					img.get((int) (p.pos.x + (p.width / 2) - dis), (int) (p.pos.y - (p.height / 2))) == colorBase
 
-				img.get((int) (p.pos.x + (p.width / 2) - dis), (int) (p.pos.y - (p.height / 2))) == colorBase
-
-		) {
-			sobre = false;
-		} else {
-			sobre = true;
+			) {
+				sobre = false;
+			} else {
+				sobre = true;
+			}
 		}
 
 		return sobre;
@@ -79,15 +51,16 @@ public class Obstaculo extends Thread {
 		PImage img = plataforma;
 		int dis = 5;
 		boolean sobre = false;
+		if (p != null && plataforma != null) {
+			if (img.get((int) p.pos.x, (int) (p.pos.y + (p.height / 2))) == colorBase ||
 
-		if (img.get((int) p.pos.x, (int) (p.pos.y + (p.height / 2))) == colorBase ||
+					img.get((int) (p.pos.x - (p.width / 2) + dis), (int) (p.pos.y + (p.height / 2))) == colorBase ||
 
-				img.get((int) (p.pos.x - (p.width / 2) + dis), (int) (p.pos.y + (p.height / 2))) == colorBase ||
-
-				img.get((int) (p.pos.x + (p.width / 2) - dis), (int) (p.pos.y + (p.height / 2))) == colorBase) {
-			sobre = false;
-		} else {
-			sobre = true;
+					img.get((int) (p.pos.x + (p.width / 2) - dis), (int) (p.pos.y + (p.height / 2))) == colorBase) {
+				sobre = false;
+			} else {
+				sobre = true;
+			}
 		}
 
 		return sobre;
@@ -97,19 +70,18 @@ public class Obstaculo extends Thread {
 		PImage img = plataforma;
 		int dis = 5;
 		boolean sobre = false;
+		if (p != null && plataforma != null) {
+			if (img.get((int) (p.pos.x - (p.width / 2)), (int) (p.pos.y)) == colorBase ||
 
-		if (img.get((int) (p.pos.x - (p.width / 2)), (int) (p.pos.y)) == colorBase ||
+					img.get((int) (p.pos.x - (p.width / 2)), (int) (p.pos.y - (p.height / 2) + dis)) == colorBase ||
 
-				img.get((int) (p.pos.x - (p.width / 2)), (int) (p.pos.y - (p.height / 2) + dis)) == colorBase ||
+					img.get((int) (p.pos.x - (p.width / 2)), (int) (p.pos.y + (p.height / 2) - dis)) == colorBase) {
+				sobre = false;
 
-				img.get((int) (p.pos.x - (p.width / 2)), (int) (p.pos.y + (p.height / 2) - dis)) == colorBase) {
-			sobre = false;
-
-		} else {
-			sobre = true;
-
+			} else {
+				sobre = true;
+			}
 		}
-
 		return sobre;
 	}
 
@@ -117,18 +89,19 @@ public class Obstaculo extends Thread {
 		PImage img = plataforma;
 		int dis = 5;
 		boolean sobre = false;
+		if (p != null && plataforma != null) {
+			if (img.get((int) (p.pos.x + (p.width / 2)), (int) (p.pos.y)) == colorBase ||
 
-		if (img.get((int) (p.pos.x + (p.width / 2)), (int) (p.pos.y)) == colorBase ||
+					img.get((int) (p.pos.x + (p.width / 2)), (int) (p.pos.y - (p.height / 2) + dis)) == colorBase ||
 
-				img.get((int) (p.pos.x + (p.width / 2)), (int) (p.pos.y - (p.height / 2) + dis)) == colorBase ||
+					img.get((int) (p.pos.x + (p.width / 2)), (int) (p.pos.y + (p.height / 2) - dis)) == colorBase
 
-				img.get((int) (p.pos.x + (p.width / 2)), (int) (p.pos.y + (p.height / 2) - dis)) == colorBase
+			) {
 
-		) {
-
-			sobre = false;
-		} else {
-			sobre = true;
+				sobre = false;
+			} else {
+				sobre = true;
+			}
 		}
 
 		return sobre;
@@ -139,14 +112,6 @@ public class Obstaculo extends Thread {
 		while (vivo) {
 			try {
 
-				limitesBasic();
-
-				if (!down()) {
-					p.seMovio[3] = false;
-				} else {
-					p.seMovio[3] = true;
-				}
-
 				sleep(20);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -154,7 +119,7 @@ public class Obstaculo extends Thread {
 			}
 		}
 	}
-	
+
 	public boolean limRight() {
 		return (p.pos.x + p.width / 2) + p.vel.x >= plataforma.width;
 	}
